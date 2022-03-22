@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skillbox_11_5/home.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,27 +16,6 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: HomeView(title: 'Animations'),
-    );
-  }
-}
-
-class HomeView extends StatefulWidget {
-  HomeView({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _HomeViewState createState() => _HomeViewState();
-}
-
-class _HomeViewState extends State<HomeView> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.black54,
-        title: Text(widget.title),
-      ),
     );
   }
 }
