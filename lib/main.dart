@@ -31,6 +31,7 @@ class _MyAppState extends State<MyApp> {
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         home: Navigator(
+          observers: [HeroController()],
           pages: [
             MaterialPage(
                 child: HomeView(
@@ -40,7 +41,11 @@ class _MyAppState extends State<MyApp> {
               MaterialPage(child: DetailScreen(space: _selectedSpace!))
           ],
           onPopPage: (route, result) {
-            return route.didPop(result);
+            if (!route.didPop(result)) return false;
+            setState(() {
+              _selectedSpace = null;
+            });
+            return true;
           },
         ));
   }

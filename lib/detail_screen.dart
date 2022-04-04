@@ -10,7 +10,38 @@ class DetailScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(),
-        body: Stack(children: [Image.asset(space.image)]),
+        body: Column(
+          children: [
+            Stack(
+              clipBehavior: Clip.none,
+              children: [
+                Hero(tag: space.id, child: Image.asset(space.image)),
+                Positioned(
+                  right: 20,
+                  bottom: -20,
+                  child: Hero(
+                    tag: '${space.id}-button',
+                    child: Container(
+                      height: 50,
+                      width: 50,
+                      color: Colors.blue,
+                      child: Icon(
+                        Icons.add,
+                        size: 48,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Hero(
+                  tag: '${space.id}-text',
+                  child: Material(child: Text(space.description))),
+            )
+          ],
+        ),
       ),
     );
   }

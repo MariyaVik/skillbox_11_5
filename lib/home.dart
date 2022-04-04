@@ -36,12 +36,7 @@ class MyCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        print(space.id);
-        onTab(space);
-        // Navigator.of(context)
-        //     .push(MaterialPageRoute(builder: (context) => DetailScreen()));
-      },
+      onTap: () => onTab(space),
       child: SizedBox(
         height: 150,
         child: Card(
@@ -52,9 +47,12 @@ class MyCardWidget extends StatelessWidget {
             children: [
               Column(children: [
                 Expanded(
-                  child: Ink.image(
-                    image: AssetImage(space.image),
-                    fit: BoxFit.cover,
+                  child: Hero(
+                    tag: space.id,
+                    child: Ink.image(
+                      image: AssetImage(space.image),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 Expanded(
@@ -63,21 +61,27 @@ class MyCardWidget extends StatelessWidget {
                         color: Colors.grey,
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(16, 16, 46, 16),
-                          child: Text(
-                            space.description,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
+                          child: Hero(
+                            tag: '${space.id}-text',
+                            child: Text(
+                              space.description,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
                         ))),
               ]),
               Positioned(
                 right: 20,
                 top: 60,
-                child: Container(
-                  height: 30,
-                  width: 30,
-                  color: Colors.yellow,
-                  child: Icon(Icons.add),
+                child: Hero(
+                  tag: '${space.id}-button',
+                  child: Container(
+                    height: 30,
+                    width: 30,
+                    color: Colors.yellow,
+                    child: Icon(Icons.add),
+                  ),
                 ),
               )
             ],
